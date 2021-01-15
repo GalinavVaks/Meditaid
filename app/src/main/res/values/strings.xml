@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Meditaid</string>
+    <string name="start">Start</string>
+    <string name="dropDownTimePrompt">Select time:</string>
+</resources>
