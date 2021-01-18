@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     fun tick(millisLeft: Long) {
         meditationMillisLeft = millisLeft
         if (abs(millisLeft*2-totalMeditationMillis)<1000)
-            //End and midway. Uncertainty in timer assumed 1000ms
+            //Midway. Uncertainty in timer assumed 1000ms
             chime()
 
         // Show countdown in mm:ss format
@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         beachWavesMP.stop()
 
         // Allow new meditation
+        beachWavesMP.prepare()
         findViewById<Button>(R.id.buttonStart).isEnabled = true
         findViewById<TextView>(R.id.dropDownPromptText).text = getString(R.string.dropDownTimePrompt)
     }
