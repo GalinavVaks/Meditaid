@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
     var countDownTimer : MeditaidCountDownTimer? = null
     var totalMeditationMillis = 0L
     var meditationMillisLeft = 0L
-    var meditationPaused = false
+    var meditationStarted = false // True between pressing start and countdown end
+    var meditationPaused = false // True when meditationStarted and activity paused
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +36,12 @@ class MainActivity : AppCompatActivity() {
     // Time remaining was saved on last tick (uncertainty 1s)
     override fun onPause() {
         super.onPause()
-        meditationPaused = true
-        beachWavesMP.pause()
-        countDownTimer?.cancel()
+        if (meditationStarted) {
+            meditationPaused = true
+            beachWavesMP.pause()
+            countDownTimer?.cancel()
+        }
+
     }
 
     // Create a new timer with the remaining time (as saved on last tick)
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startMeditate() {
+        meditationStarted = true
         var timeString = findViewById<Spinner>(R.id.dropDownTime).selectedItem.toString()
         //Modify to ISO 8601 from mm:ss
         timeString = "PT"+timeString.replace(":", "M")+"S"
@@ -90,6 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     // Function called by countDownTimer at the end of the countdown
     fun endMeditation() {
+        meditationStarted = false
         chime()
         beachWavesMP.stop()
 
