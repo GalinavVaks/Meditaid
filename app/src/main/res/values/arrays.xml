@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="dropDownTimeItems">
-        <item>0:10</item>
         <item>5:00</item>
         <item>10:00</item>
         <item>20:00</item>
