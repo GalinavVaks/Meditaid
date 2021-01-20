@@ -32,9 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:drawSelectorOnTop="true"
-        android:prompt="@string/dropDownTimePrompt"
-        android:entries="@array/dropDownTimeItems" />
+        android:drawSelectorOnTop="true" />
 
     <Button
         android:id="@+id/buttonStart"

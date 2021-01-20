@@ -1,11 +1,9 @@
 package com.vaks.galina.meditaid
 
+import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.lang.Math.abs
 import java.time.Duration
@@ -27,6 +25,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         beachWavesMP = MediaPlayer.create(this, R.raw.beach_waves)
+
+
+        val durationSpinner = findViewById<Spinner>(R.id.dropDownTime)
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.dropDownTimeItems,
+                R.layout.spinner_item_text
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.spinner_item_dropdown_text)
+            // Apply the adapter to the spinner
+            durationSpinner.adapter = adapter
+        }
 
         findViewById<Button>(R.id.buttonStart).setOnClickListener {
             startMeditate()
@@ -73,14 +84,14 @@ class MainActivity : AppCompatActivity() {
 
             chime() //Starting gong
         } else {
-            Toast.makeText(applicationContext,"Error. Try again.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Error. Try again.", Toast.LENGTH_SHORT).show()
         }
     }
 
     // Function called by countDownTimer every second
     fun tick(millisLeft: Long) {
         meditationMillisLeft = millisLeft
-        if (abs(millisLeft*2-totalMeditationMillis)<1000)
+        if (abs(millisLeft * 2 - totalMeditationMillis)<1000)
             //Midway. Uncertainty in timer assumed 1000ms
             chime()
 
@@ -111,5 +122,3 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-
-// TODO: Enlarge and bolden spinner
