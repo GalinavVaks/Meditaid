@@ -1,6 +1,5 @@
 package com.vaks.galina.meditaid
 
-import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.*
@@ -42,6 +41,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonStart).setOnClickListener {
             startMeditate()
         }
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+        beachWavesMP.release()
     }
 
     // Time remaining was saved on last tick (uncertainty 1s)
