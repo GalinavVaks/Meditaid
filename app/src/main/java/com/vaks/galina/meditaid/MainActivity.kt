@@ -119,6 +119,9 @@ class MainActivity : AppCompatActivity() {
     private fun chime() {
         val mp = MediaPlayer.create(this, R.raw.gong)
         mp.start()
+        mp.setOnCompletionListener({
+            mp.release()
+        })
     }
 }
 
